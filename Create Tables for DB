@@ -1,0 +1,71 @@
+CREATE TABLE [Customers] (
+  [Customer account number] <type>,
+  [customer_id] <type>,
+  [customer_name] <type>,
+  [customer_surname] <type>,
+  [customer_contact_number] <type>,
+  [customer_startdate] <type>,
+  [customer_active] <type>,
+  [customer_banking_info] <type>,
+  [customer_payment_date] <type>,
+  [customer_emailaddress] <type>,
+  PRIMARY KEY ([Customer account number])
+);
+
+CREATE TABLE [Payments] (
+  [payments_invoice_number] <type>,
+  [Transaction_id] <type>,
+  [payments_date] <type>,
+  [payments_type] <type>,
+  [payments_amount] <type>,
+  PRIMARY KEY ([payments_invoice_number])
+);
+
+CREATE TABLE [Personel] (
+  [personel_number] <type>,
+  [personel_id] <type>,
+  [personel_name] <type>,
+  [personel_surname] <type>,
+  [personel_jobtitle] <type>,
+  PRIMARY KEY ([personel_number])
+);
+
+CREATE TABLE [Transactions] (
+  [Transactions_id] <type>,
+  [customer_account_number] <type>,
+  [Fitnessclasses_code] <type>,
+  [payment_invoice_number] <type>,
+  [personel_number] <type>,
+  [transaction_date] <type>,
+  [customer_active] <type>,
+  [customer_banking_info] <type>,
+  [customer_payment_date] <type>,
+  [customer_emailaddress] <type>,
+  PRIMARY KEY ([Transactions_id]),
+  CONSTRAINT [FK_Transactions.payment_invoice_number]
+    FOREIGN KEY ([payment_invoice_number])
+      REFERENCES [Payments]([payments_invoice_number]),
+  CONSTRAINT [FK_Transactions.personel_number]
+    FOREIGN KEY ([personel_number])
+      REFERENCES [Personel]([personel_number])
+);
+
+CREATE TABLE [Instructor] (
+  [Instructor_id] <type>,
+  [Instructor_name] <type>,
+  [Instructor_surname] <type>,
+  [Instructor_rate] <type>,
+  PRIMARY KEY ([Instructor_id])
+);
+
+CREATE TABLE [FitnessClasses] (
+  [fitnessclasses_code] <type>,
+  [fitnessclasses_name] <type>,
+  [fitnessclasses_type] <type>,
+  [fitnessclasses_schedule] <type>,
+  [Intructor_id] <type>,
+  PRIMARY KEY ([fitnessclasses_code]),
+  CONSTRAINT [FK_FitnessClasses.Intructor_id]
+    FOREIGN KEY ([Intructor_id])
+      REFERENCES [Instructor]([Instructor_id])
+);
